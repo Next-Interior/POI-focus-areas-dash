@@ -1,0 +1,134 @@
+---
+title: "POI Focal Areas"
+runtime: shiny
+output: 
+  flexdashboard::flex_dashboard:
+    theme:
+      version: 5
+      bootswatch: sandstone
+      navbar-bg: "#805640"
+    logo: NI_logo.png
+    navbar:
+    - {title: "Github", align: right, href: "https://github.com/Next-Interior"}
+    orientation: rows
+    css: custom.css
+---
+
+```{r setup, include=FALSE}
+library(bslib)
+library(flexdashboard)
+library(ggplot2)
+library(ggthemes)
+library(googlesheets4)
+library(htmltools)
+library(shiny)
+library(shinydashboard)
+library(thematic)
+library(tidyverse)
+
+gs4_deauth()
+thematic_rmd()
+```
+
+```{r  echo=FALSE, include=FALSE}
+dat <- read_sheet("https://docs.google.com/spreadsheets/d/1jWmFviisMfDAYlNbXgpNAR12zkll-tqnYhcG6SuLJF8/edit?usp=sharing")
+
+names(dat) <- c("time", "jobs", "social", "still_around", "comms", "retire", "network", "other")
+```
+
+Background {.sidebar}
+-----------------------------------------------------------------------
+We fielded a short poll to determine the areas of greatest interest to the [LinkedIn People of Interior group](https://www.linkedin.com/groups/13267119/). Here are the results.
+
+**About**
+[Next Interior](https://www.nextinterior.org)
+
+**Questions?**
+[Get in touch](mailto:info@nextinterior.org)
+
+**Code**
+[GitHub]()
+
+Row
+-----------------------------------------------------------------------
+
+### Jobs
+
+```{r  echo=FALSE, include=TRUE}
+# "We can help each other watch for - and help people land, as we reach across our networks - jobs with a focus on the kinds of work we have done - or still do - for Interior."
+j <- table(factor(dat$jobs, levels = 1:5)) |> data.frame()
+names(j) <- c("rating", "votes")
+
+ggplot(j, aes(x=rating, y=votes)) +
+  geom_bar(stat = "identity", fill="#805640cc") +
+  labs(x = "Rating", y = "# votes") +
+  theme_tufte(base_size=22, base_family = "sans")
+```
+
+
+### Social engagement
+
+```{r  echo=FALSE, include=TRUE}
+# "Some former fed groups are facilitating social engagements, whether virtual or to help people stay connected more locally. We could do the same for people who are work colleagues and friends looking for a familiar anchor. **Bonus:** We might consider setting up some regional leads and approaches!"
+
+s <- table(factor(dat$social, levels = 1:5)) |> data.frame()
+names(s) <- c("rating", "votes")
+
+ggplot(s, aes(x=rating, y=votes)) +
+  geom_bar(stat = "identity", fill="#805640cc") +
+  labs(x = "Rating", y = "# votes") +
+  theme_tufte(base_size=22, base_family = "sans")
+```
+
+### Who is still around?
+
+```{r  echo=FALSE, include=TRUE}
+# "One of the hardest things at this time (June 2025) is knowing who is still around and who has departed or will be soon, or even what general staffing levels are like across the Department. We could try to fill in some of the gaps and make connections."
+w <- table(factor(dat$still_around, levels = 1:5)) |> data.frame()
+names(w) <- c("rating", "votes")
+
+ggplot(w, aes(x=rating, y=votes)) +
+  geom_bar(stat = "identity", fill="#805640cc") +
+  labs(x = "Rating", y = "# votes") +
+  theme_tufte(base_size=22, base_family = "sans")
+```
+
+Row
+-----------------------------------------------------------------------
+
+### Retirement
+
+```{r  echo=FALSE, include=TRUE}
+# "There may not be an Interior-specific aspect of retirement like other options thus far, but with so many people taking early retirement options, this could be an options."
+r <- table(factor(dat$retire, levels = 1:5)) |> data.frame()
+names(r) <- c("rating", "votes")
+
+ggplot(r, aes(x=rating, y=votes)) +
+  geom_bar(stat = "identity", fill="#805640cc") +
+  labs(x = "Rating", y = "# votes") +
+  theme_tufte(base_size=22, base_family = "sans")
+```
+
+### Network-of-networks
+
+```{r  echo=FALSE, include=TRUE}
+# "People of Interior can focus on connecting folks here with other groups, whether on LinkedIn or elsewhere, who focus on particular topics that aren't unique to Interior and its mission, culture, and people."
+n <- table(factor(dat$network, levels = 1:5)) |> data.frame()
+names(n) <- c("rating", "votes")
+
+ggplot(n, aes(x=rating, y=votes)) +
+  geom_bar(stat = "identity", fill="#805640cc") +
+  labs(x = "Rating", y = "# votes") +
+  theme_tufte(base_size=22, base_family = "sans")
+```
+
+### Something else!
+"Is there something not covered above that you think People of Interior might really enjoy? Share it here!"
+
+Responses thus far:
+
+```{r echo=FALSE, results='asis'}
+string.list <- na.omit(dat$other)
+cat(paste('-', string.list), sep = '\n')
+```
+

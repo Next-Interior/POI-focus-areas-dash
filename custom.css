@@ -1,0 +1,15 @@
+:where(.section.level2, section.level2) {
+  margin-top: 10px;
+}
+
+a {
+  color: #649DD7;
+}
+
+#section-background {
+  background-color: #f8f5f0 !important;
+}
+
+#dashboard-container {
+  background-color: #f8f5f0 !important;
+}
