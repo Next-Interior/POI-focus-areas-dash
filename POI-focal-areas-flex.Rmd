@@ -1,6 +1,5 @@
 ---
 title: "POI Focal Areas"
-runtime: shiny
 output: 
   flexdashboard::flex_dashboard:
     theme:
@@ -15,6 +14,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
+# runtime: shiny
 library(bslib)
 library(flexdashboard)
 library(ggplot2)
