@@ -6,6 +6,14 @@ a {
   color: #649DD7;
 }
 
+.navbar {
+  background-color: #805640cc;
+}
+
+.navbar-brand {
+  color: #ffffff;
+}
+
 #section-background {
   background-color: #f8f5f0 !important;
 }
