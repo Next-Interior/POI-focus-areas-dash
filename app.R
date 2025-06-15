@@ -26,9 +26,9 @@ function(request){
 # Define UI for application that draws a histogram
 ui <- page_navbar(
   nav_menu(
-    title = "Background",
+    title = "About",
     markdown("
-      ## Background
+      ## About
       We fielded a short poll to determine the areas of greatest interest to the [LinkedIn People of Interior group](https://www.linkedin.com/groups/13267119/). Here are the results.
 
       **About**
